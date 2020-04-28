@@ -1,9 +1,11 @@
-package io.github.luteoos.template
+package io.github.luteoos.githublister
 
 import android.app.Application
 import android.os.StrictMode
 import com.luteoos.kotlin.mvvmbaselib.BuildConfig
-import io.github.luteoos.template.di.koinModules
+import io.github.luteoos.githublister.di.koinModules
+import io.realm.Realm
+import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,6 +19,7 @@ class Application : Application() {
             androidContext(this@Application)
             modules(koinModules)
         }
+        Realm.init(get())
         if(BuildConfig.DEBUG)
             initDebugStuff()
     }
