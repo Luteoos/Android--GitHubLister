@@ -10,6 +10,7 @@ import org.koin.test.KoinTest
 import org.koin.test.check.checkModules
 import org.mockito.Mockito
 
+
 class DITest : KoinTest {
 
     @Test
@@ -19,7 +20,7 @@ class DITest : KoinTest {
                 androidContext(Mockito.mock(Context::class.java))
             }
             printLogger(Level.DEBUG)
-            modules(koinModules + mockContext)
+            modules(singleModule + factoryModule + mockContext)
         }.checkModules()
     }
 

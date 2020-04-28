@@ -9,5 +9,5 @@ data class GithubReposRestResponse(
     val id : Int,
     @Expose
     @SerializedName("name")
-    val name : Int
+    val name : String
 )

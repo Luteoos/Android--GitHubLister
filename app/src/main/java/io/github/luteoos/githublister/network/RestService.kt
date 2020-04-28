@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RestService(private val gson: GsonProvider, private val httpClient: OkHttpClientProvider) {
 
-    fun getCurrencyRatesService(): GithubRESTInterface =
+    fun getGithubUsersService(): GithubRESTInterface =
         httpClient.getDefaultOkHttpClient().let { http ->
             getRetrofitBuilder()
                 .client(http)
@@ -18,7 +18,9 @@ class RestService(private val gson: GsonProvider, private val httpClient: OkHttp
 
     fun <T> getService(serviceInterface: Class<T>) : T{
         httpClient.getDefaultOkHttpClient().let { http ->
-            getRetrofitBuilder().client(http).build().let {retrofit ->
+            getRetrofitBuilder()
+                .client(http)
+                .build().let {retrofit ->
                 return retrofit.create(serviceInterface)
             }
         }
