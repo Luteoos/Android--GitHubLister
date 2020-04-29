@@ -32,4 +32,10 @@ class MainScreenViewModel(private val githubRepository: GithubRepositoryInterfac
             false -> githubRepository.getUsersFromRealm()
         }
     }
+
+    fun getFilteredData(query: String?){
+        query?.let {
+            githubRepository.getFilteredUsersFromRealm(query)
+        } ?: githubRepository.getUsersFromRealm()
+    }
 }

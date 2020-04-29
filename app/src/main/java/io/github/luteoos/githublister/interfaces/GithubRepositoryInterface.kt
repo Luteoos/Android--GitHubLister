@@ -7,4 +7,5 @@ interface GithubRepositoryInterface {
     fun getUsersFlowable() : Observable<GithubUsersWrapper>
     fun fetchDataFromRest()
     fun getUsersFromRealm()
+    fun getFilteredUsersFromRealm(query: String)
 }

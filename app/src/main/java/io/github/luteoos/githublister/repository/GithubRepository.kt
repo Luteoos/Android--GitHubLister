@@ -22,6 +22,17 @@ class GithubRepository(private val githubService: GithubRESTInterface) : GithubR
         return stream
     }
 
+    override fun getFilteredUsersFromRealm(query: String){
+        AndroidSchedulers.mainThread().scheduleDirect {
+            Realm.getDefaultInstance()
+                .where(GithubUserRealm::class.java)
+                .contains("login", query)
+                .findAll()?.let {
+                    stream.onNext(GithubUsersWrapper(it))
+                }
+        }
+    }
+
     override fun getUsersFromRealm(){
         AndroidSchedulers.mainThread().scheduleDirect {
             Realm.getDefaultInstance()

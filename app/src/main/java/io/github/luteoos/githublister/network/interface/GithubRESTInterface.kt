@@ -11,7 +11,7 @@ import retrofit2.http.Query
 
 interface GithubRESTInterface {
     @GET("users")
-    fun getUsers(@Query("per_page") perPage: Int = 3) : Single<Response<List<GithubUsersRestResponse>>>
+    fun getUsers() : Single<Response<List<GithubUsersRestResponse>>>
 
     @GET("users/{login}/repos")
     fun getRepos(@Path("login")login: String,

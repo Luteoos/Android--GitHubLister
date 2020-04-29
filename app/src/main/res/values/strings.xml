@@ -3,4 +3,5 @@
     <string name="template_author">Mateusz Lutecki</string>
     <string name="connection_error_message">Failed to fetch data</string>
     <string name="retry">Retry</string>
+    <string name="repositories_title">Repositories:</string>
 </resources>

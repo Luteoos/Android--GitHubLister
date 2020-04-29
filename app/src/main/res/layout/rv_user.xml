@@ -14,17 +14,27 @@
 
     <TextView
         android:id="@+id/tvUsername"
-        style="@style/StandardTextView"
+        style="@style/HeaderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivAvatar"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/tvRepoTitle"
+        android:text="@string/repositories_title"
+        style="@style/StandardTextView"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvUsername"
         android:layout_centerHorizontal="true" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_repo"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:layout_margin="8dp"
-        android:layout_below="@id/tvUsername"
+        android:layout_margin="4dp"
+        android:layout_below="@id/tvRepoTitle"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>

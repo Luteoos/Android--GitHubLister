@@ -3,6 +3,7 @@ package io.github.luteoos.githublister.view.activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,6 +38,16 @@ class MainScreenActivity : ActivityVM<MainScreenViewModel>() {
 
     private fun setBindings(){
         viewModel.getUsersLiveData().observe(this, Observer { handleGithubData(it) })
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.getFilteredData(query)
+                return false
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.getFilteredData(newText)
+                return false
+            }
+        })
     }
 
     private fun setRVAdapter(){
