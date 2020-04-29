@@ -1,13 +1,17 @@
-# Android-MVVM-Koin--QuickTemplate
-Made because I waste way too much time on copy-paste code and directory tree.
+# Android GitHub Users Listing App
+Simple one-screen app containing list of 30 users from github and their 3 repo names based on MVVM architecture.
+Downloaded data is cached into Realm db, from where its used to feed the view.
+In case of lack internet connection data will be loaded from Realm.
+Multi-threaded tasks are handled by use of RxJava.
+Network connection with help of Retrofit2.
+Use of runtime di/dsl Koin.
+Avatar loading by Glide.
 
-Template repository containing:
-- Koin
-- MVVM architecture components
-- com.jakewharton.timber:timber:4.7.1 
-- com.github.Luteoos:Android--MVVMLib:4.0.0
+### To-Do
+Rethink approach with Realm db, Consider using SQL-based database like Room for optimizing query and better cooperation with RxJava.
+Cover app in at least unit tests for buisness logic.
+Adjust fonts/color of repositories list.
+Add search by repository name.
+Consider use of Dagger2 because of compile-time safety.
+Use styles more broadly.
 
-
-```git
-git pull --allow-unrelated-histories https://github.com/Luteoos/Android-MVVM-Koin--QuickTemplate master
-```
