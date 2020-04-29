@@ -7,17 +7,29 @@ import io.github.luteoos.githublister.data.rest.GithubReposRestResponse
 import io.github.luteoos.githublister.interfaces.GithubRepositoryInterface
 import io.github.luteoos.githublister.network.`interface`.GithubRESTInterface
 import io.github.luteoos.githublister.utils.saveOrUpdateToRealm
-import io.reactivex.rxjava3.core.BackpressureStrategy
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
+import io.realm.Realm
 import timber.log.Timber
 
 class GithubRepository(private val githubService: GithubRESTInterface) : GithubRepositoryInterface {
     private val stream : PublishSubject<GithubUsersWrapper> = PublishSubject.create()
 
-    override fun getUsersFlowable(): Flowable<GithubUsersWrapper> {
-        return stream.toFlowable(BackpressureStrategy.LATEST)
+    override fun getUsersFlowable(): Observable<GithubUsersWrapper> {
+        return stream
+    }
+
+    override fun getUsersFromRealm(){
+        AndroidSchedulers.mainThread().scheduleDirect {
+            Realm.getDefaultInstance()
+                .where(GithubUserRealm::class.java)
+                .findAll()?.let {
+                    stream.onNext(GithubUsersWrapper(it))
+                }
+        }
     }
 
     override fun fetchDataFromRest(){
@@ -42,8 +54,9 @@ class GithubRepository(private val githubService: GithubRESTInterface) : GithubR
             }
             .toList()
             .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-
+                getUsersFromRealm()
             },{
                 Timber.e(it)
                 stream.onNext(GithubUsersWrapper(false))

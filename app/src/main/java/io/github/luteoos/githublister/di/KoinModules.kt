@@ -1,5 +1,6 @@
 package io.github.luteoos.githublister.di
 
+import io.github.luteoos.githublister.adapter.UsersRealmRVAdapter
 import io.github.luteoos.githublister.interfaces.GithubRepositoryInterface
 import io.github.luteoos.githublister.network.GsonProvider
 import io.github.luteoos.githublister.network.OkHttpClientProvider
@@ -12,13 +13,12 @@ import org.koin.dsl.module
 val singleModule = module {
     single { GsonProvider() }
     single { OkHttpClientProvider() }
-//    single { RestService(get(), get()) }
     single { RestService(get(), get()).getGithubUsersService() }
 }
 
 val factoryModule = module {
-//    factory<GithubRESTInterface> { RestService(get(), get()).getGithubUsersService() }
     factory<GithubRepositoryInterface> { GithubRepository(get()) }
+    factory { UsersRealmRVAdapter(null) }
 }
 
 val vmModule = module {
