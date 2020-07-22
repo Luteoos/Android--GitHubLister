@@ -18,6 +18,7 @@ class MainScreenViewModel(private val githubRepository: GithubRepositoryInterfac
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 usersList.value = it
+                Timber.i("Success getUsersFlowabble")
             },{
                 Timber.e(it)
             })

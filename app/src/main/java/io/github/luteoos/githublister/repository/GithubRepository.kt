@@ -90,6 +90,7 @@ class GithubRepository(private val githubService: GithubRESTInterface) : GithubR
             .subscribe({
                 user.repos?.addAll(it)
                 user.saveOrUpdateToRealm()
+                Timber.i("Success fetch User Repo")
             },{
                 Timber.e(it)
             })

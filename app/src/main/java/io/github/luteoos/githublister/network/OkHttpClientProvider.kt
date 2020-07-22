@@ -10,8 +10,6 @@ class OkHttpClientProvider {
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
-            .dispatcher(Dispatcher().apply {
-                maxRequests = 1
-            })
+            .dispatcher(Dispatcher())
             .build()
 }
